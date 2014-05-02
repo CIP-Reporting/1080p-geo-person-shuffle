@@ -58,17 +58,12 @@
       return CIPAPI.router.goTo('login'); // Unuauthorized!
     }
 
-    // If anonymous and 404, the DNS alias does not exist    
-    if (!this.allow404 && xhr.status == 404 && CIPAPI.credentials.isAnonymous()) {
-      return CIPAPI.router.goTo('login'); // Unuauthorized!
-    }
-    
     // If 404 and 404 is allowed do not log an error
     if (this.allow404 && xhr.status == 404) {
       return;
     }
 
-    $(document).trigger('cipapi-rest-error');
+    $(document).trigger('cipapi-rest-error', thrownError);
 
     log.error(thrownError);
   }
@@ -83,6 +78,29 @@
     
     $.ajax({
       type: "GET",
+      url: credentials.host + opts.url + '.js' + encodeApiParameters(opts),
+      dataType: 'json',
+      success: opts.success,
+      complete: opts.complete,
+      headers: { "Authorization": encodeBasicAuth(credentials.user, credentials.pass) },
+      error: restErrorHandler,
+      allow404: typeof opts.allow404 != 'undefined'
+    });
+  }
+  
+  // post  
+  CIPAPI.rest.post = function(opts) {
+    if (!CIPAPI.credentials.areValid()) {
+      return CIPAPI.router.goTo('login');
+    }
+    
+    var credentials = CIPAPI.credentials.get();
+    
+    $.ajax({
+      type: "POST",
+      processData: false, // Needed for ajax file upload
+      contentType: false, // Needed for ajax file upload
+      data: opts.data,
       url: credentials.host + opts.url + '.js' + encodeApiParameters(opts),
       dataType: 'json',
       success: opts.success,

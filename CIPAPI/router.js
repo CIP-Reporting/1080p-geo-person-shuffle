@@ -42,7 +42,7 @@
     for (var i=0; i<components.length; i++) {
       var bits = components[i].split('=', 2);
       if (bits.length == 2) {
-        paramObj[bits[0]] = bits[1];
+        paramObj[unescape(bits[0])] = unescape(bits[1]);
       }
     }
     
@@ -100,7 +100,7 @@
     var paramArray = [];
     for (var key in params) {
       if (params.hasOwnProperty(key)) {
-        paramArray.push(key + '=' + params[key]);
+        paramArray.push(escape(key) + '=' + escape(params[key]));
       }
     }
     var paramString = paramArray.join('!');

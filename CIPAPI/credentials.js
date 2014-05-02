@@ -30,20 +30,6 @@
   var user = localStorage.getItem("user");
   var pass = localStorage.getItem("pass");
   
-  // Anonymous credentials - attempted on startup ONCE if other credentials are not provided
-  var anonymousHost = 'http://cipapi:4399';
-  var anonymousUser = 'anonymous@anonymous/Anonymous';
-  var anonymousPass = 'anonymous';
-  
-  // Zero config option if the DNS entry, user, database, profile, and password all line up...
-  if (host === null) host = anonymousHost;
-  if (user === null) user = anonymousUser;
-  if (pass === null) pass = anonymousPass;
-  
-  CIPAPI.credentials.isAnonymous = function() {
-    return anonymousHost === host && anonymousUser === user && anonymousPass === pass;
-  }
-  
   // Do we have a working credential set
   CIPAPI.credentials.areValid = function() {
     return null !== host && null !== user && null !== pass;

@@ -30,7 +30,7 @@
   function loadSettings() {
     log.debug("Loading settings");
     CIPAPI.rest.GET({ 
-      url: '/api/versions/current/information/settings', 
+      url: '/api/versions/current/facts/settings', 
       success: function(response) { 
         CIPAPI.settings = response.data.item[0].data;
         $(document).trigger('cipapi-settings-set');

@@ -30,7 +30,7 @@
   function loadMe() {
     log.debug("Loading me");
     CIPAPI.rest.GET({ 
-      url: '/api/versions/current/information/me', 
+      url: '/api/versions/current/facts/me', 
       success: function(response) { 
         CIPAPI.me = response.data.item[0].data;
         $(document).trigger('cipapi-me-set');
