@@ -2,7 +2,7 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
   xmlns:gap = "http://phonegap.com/ns/1.0"
   id = "com.phonegap.cippersonshuffle"
-  version = "1.">
+  version = "1.3377">
 
   <name>Person Shuffle</name>
 
